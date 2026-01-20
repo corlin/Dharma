@@ -3,7 +3,7 @@
 > **"Cosmic Law, Destiny, Right Path"**
 > Awakening in action.
 
-![App Icon](Assets.xcassets/AppIcon.appiconset/Icon-1024.png)
+![App Icon](Dharma/Assets.xcassets/AppIcon.appiconset/Icon-83.5@2x.png)
 
 ## 🌌 Philosophy
 

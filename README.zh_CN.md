@@ -3,7 +3,7 @@
 > **赛博时代的修行系统 (Cybernetic Monk Mode)**
 > 觉悟而行，在行动中觉醒。
 
-![App Icon](Assets.xcassets/AppIcon.appiconset/Icon-1024.png)
+![App Icon](Dharma/Assets.xcassets/AppIcon.appiconset/Icon-83.5@2x.png)
 
 ## 🌌 核心哲学 (Philosophy)
 
