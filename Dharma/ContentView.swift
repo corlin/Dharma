@@ -5,57 +5,62 @@
 //  Created by 陈永林 on 19/01/2026.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+  @State private var selectedTab: Tab = .excavate
 
-    var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
-                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-        } detail: {
-            Text("Select an item")
-        }
-    }
+  enum Tab {
+    case excavate
+    case orient
+    case execute
+    case feedback
+    case evolve
+  }
 
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
+  var body: some View {
+    TabView(selection: $selectedTab) {
+      ExcavateHomeView()
+        .tabItem {
+          Label("Excavate", systemImage: "magnifyingglass")
         }
-    }
+        .tag(Tab.excavate)
 
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
+      OrientHomeView()
+        .tabItem {
+          Label("Orient", systemImage: "safari")
         }
+        .tag(Tab.orient)
+
+      ExecuteHomeView()
+        .tabItem {
+          Label("Execute", systemImage: "bolt.fill")
+        }
+        .tag(Tab.execute)
+
+      FeedbackHomeView()
+        .tabItem {
+          Label("Feedback", systemImage: "chart.bar.fill")
+        }
+        .tag(Tab.feedback)
+
+      EvolveHomeView()
+        .tabItem {
+          Label("Evolve", systemImage: "leaf.fill")
+        }
+        .tag(Tab.evolve)
     }
+    .tint(Color.brand)  // Using brand color for active tab
+  }
 }
 
 #Preview {
-    ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+  ContentView()
+    .modelContainer(
+      for: [
+        UserModel.self,
+        DailyLeverModel.self,
+        AntiVisionModel.self,
+      ], inMemory: true)
 }
